@@ -28,7 +28,10 @@ repository image that is on Docker Hub called `Registry with tag 2 (registry:2)`
 installation command is
 ```shell
 🐳 docker run -d -p 5000:5000 --restart=always --name registry registry:2
+```
+**output**
 
+```shell
 Unable to find image 'registry:2' locally
 2: Pulling from library/registry
 df9b9388f04a: Pull complete
@@ -48,7 +51,10 @@ The `-d` option is to run as a daemon in the `background`. The `-p` is to set th
 To test this registry, we pull any image from Docker Hub, for example, 
 ```shell
 🐳 docker pull busybox
+```
+**output**
 
+```shell
 Using default tag: latest
 latest: Pulling from library/busybox
 50e8d59317eb: Pull complete
@@ -56,7 +62,7 @@ Digest: sha256:d2b53584f580310186df7a2055ce3ff83cc0df6caacf1e3489bff8cf5d0af5d8
 Status: Downloaded newer image for busybox:latest
 docker.io/library/busybox:latest
 ```
-. Then rename it to add the local repository name using 
+Then rename it to add the local repository name using 
 ```shell
 🐳 docker tag busybox localhost:5000/firstapp`
 ```
@@ -64,7 +70,10 @@ Now, push it to the local registry using
 
 ```shell 
 🐳 docker push localhost:5000/firstapp
+```
+**output**
 
+```shell
 Using default tag: latest
 The push refers to repository [localhost:5000/firstapp]
 eb6b01329ebe: Pushed
@@ -83,7 +92,11 @@ and
 
 ```shell
 🐳 docker image remove localhost:5000/firstapp
+```
 
+**output**
+
+```shell
 Untagged: localhost:5000/firstapp:latest
 Untagged: localhost:5000/firstapp@sha256:52f431d980baa76878329b68ddb69cb124c25efa6e206d8b0bd797a828f0528e
 Deleted: sha256:1a80408de790c0b1075d0a7e23ff7da78b311f85f36ea10098e4a6184c200964
@@ -95,7 +108,16 @@ do not have trace of these images, list the images using
 ```shell
 🐳 docker image ls
 ```
-, and we will
-not find these images in the list anymore. Pull the image from our local registry: `docker pull localhost:5000/firstapp`.
-To `remove` the `local registry`, `stop it and remove` it using `docker container stop registry && docker container rm -v registry`.
+And we will
+not find these images in the list anymore. Pull the image from our local registry: 
+```shell 
+🐳 docker pull localhost:5000/firstapp
+```
+
+To `remove` the `local registry`, `stop it and remove` it using 
+
+```shell
+🐳 docker container stop registry && docker container rm -v registry
+```
+
 To add a GUI, follow the steps in this site: http://joxit.github.io/dockerregistry-ui/.
