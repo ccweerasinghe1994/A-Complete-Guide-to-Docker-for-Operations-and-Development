@@ -26,10 +26,8 @@ registry.
 To set up a local registry without a graphical user interface `(GUI)`, we will use a
 repository image that is on Docker Hub called `Registry with tag 2 (registry:2)`. The
 installation command is
-![](img/1.png)
-```docker
-$ docker run -d -p 5000:5000 --restart=always --name
-registry registry:2
+```shell
+$ docker run -d -p 5000:5000 --restart=always --name registry registry:2
 
 Unable to find image 'registry:2' locally
 2: Pulling from library/registry
@@ -48,7 +46,7 @@ The `-d` option is to run as a daemon in the `background`. The `-p` is to set th
 `policy to be always and set the container name as registry`.
 
 To test this registry, we pull any image from Docker Hub, for example, 
-```docker
+```shell
 $ docker pull busybox
 
 Using default tag: latest
@@ -59,12 +57,12 @@ Status: Downloaded newer image for busybox:latest
 docker.io/library/busybox:latest
 ```
 . Then rename it to add the local repository name using 
-```docker
+```shell
 $ docker tag busybox localhost:5000/firstapp`
 ```
 Now, push it to the local registry using 
 
-```docker 
+```shell 
 $ docker push localhost:5000/firstapp
 
 Using default tag: latest
@@ -75,7 +73,7 @@ latest: digest: sha256:52f431d980baa76878329b68ddb69cb124c25efa6e206d8b0bd797a82
 
 
 `Delete` all the `local` `images` using 
-```docker
+```shell
 $ docker image remove busybox
 
 Untagged: busybox:latest
@@ -83,7 +81,7 @@ Untagged: busybox@sha256:d2b53584f580310186df7a2055ce3ff83cc0df6caacf1e3489bff8c
 ```
 and 
 
-```docker
+```shell
 $ docker image remove localhost:5000/firstapp
 
 Untagged: localhost:5000/firstapp:latest
@@ -94,8 +92,8 @@ Deleted: sha256:eb6b01329ebe73e209e44a616a0e16c2b8e91de6f719df9c35e6cdadadbe5965
 ```
 To make sure that we
 do not have trace of these images, list the images using 
-```docker
-docker image ls
+```shell
+$ docker image ls
 ```
 , and we will
 not find these images in the list anymore. Pull the image from our local registry: `docker pull localhost:5000/firstapp`.
