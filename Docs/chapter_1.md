@@ -26,7 +26,7 @@ registry.
 To set up a local registry without a graphical user interface `(GUI)`, we will use a
 repository image that is on Docker Hub called `Registry with tag 2 (registry:2)`. The
 installation command is
-```shell
+```dockerfile
 $ docker run -d -p 5000:5000 --restart=always --name registry registry:2
 
 Unable to find image 'registry:2' locally
